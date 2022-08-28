@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="src/styles.css" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/6f1c168743.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg-light">
+    <div
+      class="border mt-5 rounded py-3 px-5 bg-white mx-auto"
+      style="width: 50rem"
+    >
+      <div class="row text-primary text-center">
+        <div class="col">London</div>
+        <div class="col">Madrid</div>
+        <div class="col">Kyiv</div>
+        <div class="col">Helsinki</div>
+        <div class="col">Paris</div>
+      </div>
+
+      <hr class="border border-dark mb-4" />
+
+      <div class="row mb-5">
+        <form id="search-form" class="col-8">
+          <div class="input-group">
+            <input
+              id="search-input"
+              type="search"
+              class="form-control"
+              placeholder="Enter a city"
+            />
+            <button class="btn btn-success" type="submit">Search</button>
+          </div>
+        </form>
+
+        <div class="col-4">
+          <button id="current" type="button" class="btn btn-primary w-100">
+            Current
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-8">
+          <div class="row">
+            <div class="col-5">
+              <div id="city" class="mb-3 fs-4 fw-semibold"></div>
+              <div class="text-primary small">
+                <span id="date"></span>
+                <br />
+                <span id="weather"></span>
+              </div>
+            </div>
+            <div class="col-7 position-relative p-1">
+              <div class="position-absolute top-0 start-0 mt-1">
+                <i class="fa-solid fa-cloud-sun fa-2xl"></i>
+              </div>
+              <div class="fs-1 fw-bold mt-3 ms-5 d-inline-block">
+                <span id="temperature"></span>°C
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="mb-3">
+            Humidity:
+            <span id="humidity"></span>
+            %
+          </div>
+          <div>
+            Wind:
+            <span id="wind"></span>
+            km/h
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class="col d-grid gap-3">
+          <div>Wed</div>
+          <div>
+            <i class="fa-solid fa-cloud fa-2xl"></i>
+          </div>
+          <div>20°</div>
+        </div>
+        <div class="col d-grid gap-3">
+          <div>Thu</div>
+          <div>
+            <i class="fa-solid fa-cloud fa-2xl"></i>
+          </div>
+          <div>19°</div>
+        </div>
+        <div class="col d-grid gap-3">
+          <div>Fri</div>
+          <div>
+            <i class="fa-solid fa-cloud-sun fa-2xl"></i>
+          </div>
+          <div>21°</div>
+        </div>
+        <div class="col d-grid gap-3">
+          <div>Sat</div>
+          <div>
+            <i class="fa-solid fa-cloud-sun fa-2xl"></i>
+          </div>
+          <div>20°</div>
+        </div>
+        <div class="col d-grid gap-3">
+          <div>Sun</div>
+          <div>
+            <i class="fa-solid fa-cloud fa-2xl"></i>
+          </div>
+          <div>19°</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
