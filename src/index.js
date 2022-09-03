@@ -5,6 +5,7 @@ let windElement = document.querySelector("#wind");
 let humidityElement = document.querySelector("#humidity");
 let weatherElement = document.querySelector("#weather");
 let temperatureElement = document.querySelector("#temperature");
+let iconElement = document.querySelector("#icon");
 let currentButton = document.querySelector("#current");
 
 function formatDate(date) {
@@ -75,6 +76,11 @@ function showWeather(response) {
   humidityElement.innerText = response.data.main.humidity;
   weatherElement.innerText = response.data.weather[0].main;
   temperatureElement.innerText = Math.round(response.data.main.temp);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 dateElement.innerText = formatDate(new Date());
