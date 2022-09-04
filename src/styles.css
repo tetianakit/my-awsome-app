@@ -2,6 +2,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .icon {
   width: 75px;
   height: 75px;
@@ -9,4 +13,13 @@ body {
 
 .temperature {
   font-size: 50px;
+}
+
+.active {
+  color: inherit;
+}
+
+.active:hover {
+  color: inherit;
+  cursor: default;
 }

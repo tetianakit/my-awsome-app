@@ -7,6 +7,9 @@ let weatherElement = document.querySelector("#weather");
 let temperatureElement = document.querySelector("#temperature");
 let iconElement = document.querySelector("#icon");
 let currentButton = document.querySelector("#current");
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+let celsiusLink = document.querySelector("#celsius-link");
+let celsiusTemperature = null;
 
 function formatDate(date) {
   let hours = date.getHours();
@@ -71,11 +74,12 @@ function retrieveWeather(url) {
     });
 }
 function showWeather(response) {
+  celsiusTemperature = Math.round(response.data.main.temp);
   cityElement.innerText = response.data.name;
   windElement.innerText = response.data.wind.speed;
   humidityElement.innerText = response.data.main.humidity;
   weatherElement.innerText = response.data.weather[0].main;
-  temperatureElement.innerText = Math.round(response.data.main.temp);
+  temperatureElement.innerText = celsiusTemperature;
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -83,7 +87,22 @@ function showWeather(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  temperatureElement.innerText = Math.round(celsiusTemperature * (9 / 5) + 32);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  temperatureElement.innerText = celsiusTemperature;
+}
+
 dateElement.innerText = formatDate(new Date());
 searchForm.addEventListener("submit", search);
-currentButton.addEventListener("click", current);
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 retrieveWeatherByCity("Helsinki");
