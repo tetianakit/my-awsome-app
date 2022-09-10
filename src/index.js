@@ -1,9 +1,12 @@
+let units = "metric";
+let apiKey = "c95d60a1e3adbeb286133f1ebebc2579";
 let dateElement = document.querySelector("#date");
 let searchForm = document.querySelector("#search-form");
 let cityElement = document.querySelector("#city");
 let windElement = document.querySelector("#wind");
 let humidityElement = document.querySelector("#humidity");
 let weatherElement = document.querySelector("#weather");
+let forecastElement = document.querySelector("#forecast");
 let temperatureElement = document.querySelector("#temperature");
 let iconElement = document.querySelector("#icon");
 let currentButton = document.querySelector("#current");
@@ -60,9 +63,6 @@ function retrieveWeatherByCoordinates(lat, lon) {
   retrieveWeather(url);
 }
 function getUrl() {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let units = "metric";
-
   return `https://api.openweathermap.org/data/2.5/weather?units=${units}&appid=${apiKey}`;
 }
 function retrieveWeather(url) {
@@ -85,6 +85,44 @@ function showWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+  retrieveForecast(response.data.coord.lat, response.data.coord.lon);
+}
+
+function retrieveForecast(lat, lon) {
+  axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,hourly,minutely&units=${units}&appid=${apiKey}`
+    )
+    .then(showForecast)
+    .catch(function (error) {
+      return;
+    });
+}
+
+function showForecast(response) {
+  let forecast = response.data.daily.splice(0, 5);
+  let forecastHTML = "";
+
+  forecast.forEach(function (day) {
+    let tempDay = Math.round(day.temp.day);
+    let tempNight = Math.round(day.temp.night);
+    let shortDay = formatDate(new Date(day.dt * 1000)).slice(0, 3);
+    let src = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
+    let alt = day.weather[0].description;
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col d-grid">
+        <div>${shortDay}</div>
+        <div>
+          <img src="${src}" alt="${alt}" class="icon" />
+        </div>
+        <div>${tempDay}°  <span class="text-muted">${tempNight}°</span></div>
+      </div>
+    `;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function displayFahrenheitTemperature(event) {
