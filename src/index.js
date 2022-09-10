@@ -105,4 +105,10 @@ dateElement.innerText = formatDate(new Date());
 searchForm.addEventListener("submit", search);
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
+document.querySelectorAll(".change-city").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    event.preventDefault();
+    retrieveWeatherByCity(event.target.innerText);
+  });
+});
 retrieveWeatherByCity("Helsinki");
