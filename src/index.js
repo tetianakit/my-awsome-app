@@ -141,6 +141,7 @@ function displayCelsiusTemperature(event) {
 
 dateElement.innerText = formatDate(new Date());
 searchForm.addEventListener("submit", search);
+currentButton.addEventListener("click", current);
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 document.querySelectorAll(".change-city").forEach((item) => {
